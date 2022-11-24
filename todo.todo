@@ -1,0 +1,15 @@
+(#frontend) rework front:
+- [x] 🚚 moving files to /components & /pages folders
+- [ ] 🎉 create the default page containing a form asking for the user's name, message, amount & whether they choose to be anonymous or not before moving to Payment
+- [ ] 🎨 rework the flow of user actions from doing their donation to actually paying
+----
+
+(#persistence) Persistence:
+- [ ] 🎉 add firebase to project
+- [ ] 🎉 store user data in Firebase (name, message, amount, anonymousOrNot)
+----
+
+(#ux) user experience:
+- [ ] 📃 make some good explained docs (maybe a gif or something?)
+----
+
