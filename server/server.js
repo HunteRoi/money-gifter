@@ -3,6 +3,7 @@ require('dotenv').config({ path: './.env' });
 const express = require('express');
 const app = express();
 const { resolve } = require('path');
+const db = require('./database');
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY, {
   apiVersion: '2022-08-01',
@@ -22,6 +23,17 @@ app.get('/config', (req, res) => {
   });
 });
 
+app.post('/payments', async (req, res) => {
+  try {
+    db.getInstance().addPayment({ ...req.body });
+    res.sendStatus(202);
+  } catch(e) {
+    return res.status(400).send({
+      error: { message: e.message }
+    });
+  }
+});
+
 app.post('/create-payment-intent', async (req, res) => {
   try {
     const paymentIntent = await stripe.paymentIntents.create({
@@ -36,9 +48,7 @@ app.post('/create-payment-intent', async (req, res) => {
     });
   } catch (e) {
     return res.status(400).send({
-      error: {
-        message: e.message,
-      },
+      error: { message: e.message }
     });
   }
 });

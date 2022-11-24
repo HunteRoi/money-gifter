@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { PaymentElement } from '@stripe/react-stripe-js';
 import { useStripe, useElements } from '@stripe/react-stripe-js';
 
-export default function CheckoutForm() {
+export default function CheckoutForm({ callback }) {
   const stripe = useStripe();
   const elements = useElements();
 
@@ -35,6 +35,7 @@ export default function CheckoutForm() {
     }
 
     setIsProcessing(false);
+    callback();
   };
 
   return (

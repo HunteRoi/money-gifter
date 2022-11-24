@@ -5,8 +5,8 @@
 ----
 
 (#persistence) Persistence:
-- [ ] 🎉 add firebase to project
-- [ ] 🎉 store user data in Firebase (name, message, amount, anonymousOrNot)
+- [x] 🎉 add firebase to project
+- [x] 🎉 store user data in Firebase (name, message, amount, anonymousOrNot)
 ----
 
 (#ux) user experience:
