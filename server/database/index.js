@@ -1,5 +1,5 @@
-const { initializeApp } = require("firebase/app");
-const { getFirestore, setDoc, doc, addDoc, collection } = require("firebase/firestore/lite");
+const { initializeApp } = require('firebase/app');
+const { getFirestore, setDoc, doc } = require('firebase/firestore/lite');
 
 const firebaseConfig = {
     apiKey: process.env.FIREBASE_API_KEY,
@@ -19,9 +19,14 @@ class Database {
         this.#db = getFirestore(app);
     }
 
-    async addPayment(paymentData) {
-        const paymentsCollection = collection(this.#db, "payments");
-        await addDoc(paymentsCollection, paymentData);
+    async addPayment(id, paymentData) {
+        const paymentRef = doc(this.#db, 'payments', id);
+        await setDoc(paymentRef, paymentData);
+    }
+
+    async updatePayment(id, paymentDetails) {
+        const paymentRef = doc(this.#db, 'payments', id);
+        setDoc(paymentRef, { paymentDetails }, { merge: true });
     }
 
     static getInstance() {

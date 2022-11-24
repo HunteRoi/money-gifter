@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { PaymentElement } from '@stripe/react-stripe-js';
 import { useStripe, useElements } from '@stripe/react-stripe-js';
 
-export default function CheckoutForm({ callback }) {
+export default function CheckoutForm({ saveMetadata }) {
   const stripe = useStripe();
   const elements = useElements();
 
@@ -20,6 +20,7 @@ export default function CheckoutForm({ callback }) {
 
     setIsProcessing(true);
 
+    saveMetadata();
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
@@ -35,7 +36,6 @@ export default function CheckoutForm({ callback }) {
     }
 
     setIsProcessing(false);
-    callback();
   };
 
   return (
